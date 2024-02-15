@@ -22,13 +22,16 @@ function addTask() {
     desctiptionInput.value = '';
     numberInput.value = '';
     checkTime();
+    saveData();
 }
 
 listItems.addEventListener('click', function (e) {
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("checked");
+        saveData();
     } else if(e.target.tagName === "SPAN"){
         e.target.parentElement.remove();
+        saveData();
     } else if(e.target.classList.contains("fa-pencil")){
         const taskInfo = listItems.querySelector('p');
         const [topic, description, time] = taskInfo.textContent.split(" - ");
@@ -39,6 +42,7 @@ listItems.addEventListener('click', function (e) {
         topicInput.value = document.getElementById('topic-input').value;;
         desctiptionInput.value = document.getElementById('description-input').value;
         numberInput.value = document.getElementById('timer-input').value;
+        saveData();
     }
 }, false);
 
@@ -56,3 +60,13 @@ function changeColorWithDelay(item, color, delay) {
         item.style.color = color;
     }, delay);
 }
+
+function saveData() {
+    localStorage.setItem('listItems', listItems.innerHTML);
+}
+
+function loadData() {
+    listItems.innerHTML = localStorage.getItem('listItems');
+}
+
+loadData();
