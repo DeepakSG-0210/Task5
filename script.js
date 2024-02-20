@@ -4,7 +4,7 @@ const numberInput = document.getElementById('timer-input');
 
 const listItems = document.getElementById('list-container');
 function addTask() {
-    if (topicInput.value === '' || desctiptionInput.value === '' || numberInput.value === '') {
+    if (topicInput.value.trim() === '' || desctiptionInput.value.trim() === '' || numberInput.value.trim() === '') {
         alert('Please fill in all fields');
     } else {
         const listItem = document.createElement('li');
@@ -15,7 +15,7 @@ function addTask() {
         `;
         listItems.appendChild(listItem);
         let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
+        span.innerHTML = "&#128465";
         listItem.appendChild(span);
     } 
     topicInput.value = '';
@@ -48,6 +48,7 @@ listItems.addEventListener('click', function (e) {
 
 function checkTime() {
     const listElements = document.querySelectorAll('.list-item');
+    // console.log(listElements);
     listElements.forEach(function (item) {
         const time = item.querySelector('em').textContent;
         let timeM = time.match(/(\d+)/);
